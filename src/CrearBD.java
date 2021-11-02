@@ -28,11 +28,12 @@ public class CrearBD {
         Statement sentencia = conexion.createStatement();
         
         //Paso 5: lanzar la sentencia de modificacion de la BD con executeUpdate
-        sentencia.executeUpdate("CREATE TABLE Articulos (\n" +
-                                "codArticulo INT PRIMARY KEY,\n" +
-                                "nombre VARCHAR(20),\n" +
-                                "precio FLOAT (5,2),\n" +
-                                "descripcion VARCHAR(150));");
+        sentencia.executeUpdate("CREATE TABLE empleados (\n" +
+                                "codEmpleado INT PRIMARY KEY,\n" +
+                                "nombre VARCHAR(60),\n" +
+                                "apellido VARCHAR(120)FLOAT (5,2),\n" +
+                                "puesto VARCHAR(50),\n" +
+                                "salario FLOAT (6,2));");
         
         //Paso 6: Liberar los recursos
         sentencia.close();

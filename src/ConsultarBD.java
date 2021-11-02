@@ -24,7 +24,9 @@ public class ConsultarBD {
         Statement sentencia = conexion.createStatement();
         
         //Paso 5: Lanzar una consulta SQL con ExecuteQuery
-        ResultSet resultado = sentencia.executeQuery("SELECT * FROM articulos");
+        ResultSet resultado = sentencia.executeQuery(
+                "SELECT * FROM empleados WHERE salario > 1500"
+        );
       
         //Paso 6: recorremos la colección para visualizar cada fila
         //Hacemos un bucle mientras que haya registros y sacamos los datos por posicion de columna
@@ -37,10 +39,10 @@ public class ConsultarBD {
         }*/
         //Hacemos un bucle mientras que haya registros y sacamos los datos por nombre de columna
         while(resultado.next()){
-            System.out.println(resultado.getInt("CodArticulo")+"\t\t"+
-                    resultado.getString("nombre")+"\t\t"+
-                    resultado.getFloat("precio")+"\t\t"+                    
-                    resultado.getString("descripcion")+"\n");
+            System.out.println(resultado.getString("nombre")+"\t\t"+
+                    resultado.getString("apellidos")+"\t\t"+                    
+                    resultado.getString("puesto")+"\t\t"+
+                     resultado.getFloat("salario")+"\n");
         }
         
         //Paso 7: Liberar los recursos

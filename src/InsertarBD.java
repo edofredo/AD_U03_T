@@ -26,10 +26,26 @@ public class InsertarBD {
         
         //Paso 5: lanzar la sentencia de modificacion de la BD con executeUpdate
         int filas = 0;
-        filas = filas + sentencia.executeUpdate("INSERT INTO Articulos (codArticulo, nombre, precio, descripcion) VALUES (1, 'Camiseta', 5, 'Camiseta de diferentes colores')");
-        filas = filas + sentencia.executeUpdate("INSERT INTO Articulos (codArticulo, nombre, precio, descripcion) VALUES (2, 'Camisa', 15, 'Camisa de fiesta')");
-        filas = filas + sentencia.executeUpdate("INSERT INTO Articulos (codArticulo, nombre, precio, descripcion) VALUES (3, 'Pantalon', 20, 'Jeans')");
-        filas = filas + sentencia.executeUpdate("INSERT INTO Articulos (codArticulo, nombre, precio, descripcion) VALUES (4, 'Abrigo', 60, 'Abrigo contra el frio')");
+        filas = filas + sentencia.executeUpdate(
+                        "INSERT INTO empleados (codEmpleados, nombre, apellidos, puesto, salario) " +
+                        "VALUES (1, 'Cristian', 'Ade', 'Desarrollador',1750)"
+        );
+        filas = filas + sentencia.executeUpdate(
+                        "INSERT INTO empleados (codEmpleados, nombre, apellidos, puesto, salario) " +
+                        "VALUES (2, 'Manuel', 'Martinez', 'Contable',1200)"
+        );
+        filas = filas + sentencia.executeUpdate(
+                        "INSERT INTO empleados (codEmpleados, nombre, apellidos, puesto, salario) " +
+                        "VALUES (3, 'Silvia', 'Marzo', 'Desarrollador',1600)"
+        );
+        filas = filas + sentencia.executeUpdate(
+                        "INSERT INTO empleados (codEmpleados, nombre, apellidos, puesto, salario) " +
+                        "VALUES (4, 'Miguel', 'Cerezo', 'Analista',1500)"
+        );
+        filas = filas + sentencia.executeUpdate(
+                        "INSERT INTO empleados (codEmpleados, nombre, apellidos, puesto, salario) " +
+                        "VALUES (5, 'Sara, 'Toro', 'Gerente',1800)"
+        );
           
         
         //Paso 6: Comprobamos cuantas filas se han insertado
