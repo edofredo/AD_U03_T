@@ -17,12 +17,16 @@ public class CrearBD {
      * unico metodo de la clase que hace todo el trabajo. Es main.
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) throws ClassNotFoundException, 
+            SQLException {
         //carga del conector para mysql
         Class.forName("com.mysql.cj.jdbc.Driver");
         
-        //establecimiento de la conexion con la BD. Se pasa por parametros la URL, usuario y contrasena.
-        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestionempleados2122","root","");
+        /*establecimiento de la conexion con la BD. 
+        *Se pasa por parametros la URL, usuario y contrasena.
+        */
+        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost"
+                + "/gestionempleados2122","root","");
         
         //comprobacion de que las transacciones se encuentran en modo autocommit
         boolean autoCommit = conexion.getAutoCommit();
@@ -41,7 +45,7 @@ public class CrearBD {
         sentencia.executeUpdate("CREATE TABLE empleados (\n" +
                                 "codEmpleado INT PRIMARY KEY,\n" +
                                 "nombre VARCHAR(60),\n" +
-                                "apellido VARCHAR(120),\n" +
+                                "apellidos VARCHAR(120),\n" +
                                 "puesto VARCHAR(50),\n" +
                                 "salario FLOAT (6,2));");
         
