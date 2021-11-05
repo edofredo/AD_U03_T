@@ -1,7 +1,6 @@
 
 import java.sql.*;
 
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,33 +8,45 @@ import java.sql.*;
  */
 
 /**
- *
+ * clase que crea la tabla empleados en la BD gestionempleados2122
  * @author Cristian
  */
 public class CrearBD {
 
     /**
+     * unico metodo de la clase que hace todo el trabajo. Es main.
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        //Paso 2: Cargar el driver para las versiones modernas de MYSQL Y Java
+        //carga del conector para mysql
         Class.forName("com.mysql.cj.jdbc.Driver");
         
-        //Paso 3: Establecer la conexion con la BD : URL, USUARIO y CONTRASEÑA
-        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/tienda","root","");
+        //establecimiento de la conexion con la BD. Se pasa por parametros la URL, usuario y contrasena.
+        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestionempleados2122","root","");
         
-        //Paso 4: Preparar la sentencia
+        //comprobacion de que las transacciones se encuentran en modo autocommit
+        boolean autoCommit = conexion.getAutoCommit();
+        System.out.println(autoCommit);
+        //en caso de que no este en autocommit, se establece a autocommit
+        if(!autoCommit){
+            conexion.setAutoCommit(true);
+        }
+                
+        /*creacion de un objeto Statement sobre la conexion. Este objeto permitira
+        * la creacion y ejecucion de las sentencias sql
+        */
         Statement sentencia = conexion.createStatement();
         
-        //Paso 5: lanzar la sentencia de modificacion de la BD con executeUpdate
+        //sentencia sql de creacion de tabla      
         sentencia.executeUpdate("CREATE TABLE empleados (\n" +
                                 "codEmpleado INT PRIMARY KEY,\n" +
                                 "nombre VARCHAR(60),\n" +
-                                "apellido VARCHAR(120)FLOAT (5,2),\n" +
+                                "apellido VARCHAR(120),\n" +
                                 "puesto VARCHAR(50),\n" +
                                 "salario FLOAT (6,2));");
         
-        //Paso 6: Liberar los recursos
+        
+        //liberacion de los recursos Statement y Connection
         sentencia.close();
         conexion.close();
     }   

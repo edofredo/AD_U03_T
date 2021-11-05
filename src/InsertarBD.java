@@ -19,7 +19,13 @@ public class InsertarBD {
         Class.forName("com.mysql.cj.jdbc.Driver");
         
         //Paso 3: Establecer la conexion con la BD : URL, USUARIO y CONTRASEÑA
-        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/tienda","root","");
+        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestionempleados2122","root","");
+        
+        boolean autoCommit = conexion.getAutoCommit();
+        System.out.println(autoCommit);
+        if(!autoCommit){
+            conexion.setAutoCommit(true);
+        }
         
         //Paso 4: Preparar la sentencia
         Statement sentencia = conexion.createStatement();
