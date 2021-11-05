@@ -5,45 +5,45 @@
  */
 import java.sql.*;
 /**
- *
+ *clase que consulta filas en la tabla empleados
  * @author Cristian
  */
 public class ConsultarBD {
 
     /**
+     * unico metodo de la clase que hace todo el trabajo. Es main.
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ClassNotFoundException, SQLException{
-        //Paso 2: Cargar el driver para las versiones modernas de MYSQL Y Java
+    public static void main(String[] args) throws ClassNotFoundException, 
+            SQLException{
+        //carga del conector para mysql
         Class.forName("com.mysql.cj.jdbc.Driver");
         
-        //Paso 3: Establecer la conexion con la BD : URL, USUARIO y CONTRASEÑA
-        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestionempleados2122","root","");
+        /*establecimiento de la conexion con la BD. 
+        *Se pasa por parametros la URL, usuario y contrasena.
+        */
+        Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://localhost/gestionempleados2122","root","");
         
+        //comprobacion de que las transacciones se encuentran en modo autocommit
         boolean autoCommit = conexion.getAutoCommit();
         System.out.println(autoCommit);
+        //en caso de que no este en autocommit, se establece a autocommit
         if(!autoCommit){
             conexion.setAutoCommit(true);
         }
         
-        //Paso 4: Preparar la sentencia
+        /*creacion de un objeto Statement sobre la conexion. Este objeto permitira
+        * la creacion y ejecucion de las sentencias sql
+        */
         Statement sentencia = conexion.createStatement();
         
-        //Paso 5: Lanzar una consulta SQL con ExecuteQuery
+        //consulta de todos los empleados cuyo sueldo sea mayor que 1500
         ResultSet resultado = sentencia.executeQuery(
                 "SELECT * FROM empleados WHERE salario > 1500"
         );
       
-        //Paso 6: recorremos la colección para visualizar cada fila
-        //Hacemos un bucle mientras que haya registros y sacamos los datos por posicion de columna
-        /*while(resultado.next()){
-            System.out.println(resultado.getInt(1)+"\t\t"+
-                    resultado.getString(2)+"\t\t"+
-                    resultado.getFloat(3)+"\t\t"+                    
-                    resultado.getString(4)+"\n");
-            
-        }*/
-        //Hacemos un bucle mientras que haya registros y sacamos los datos por nombre de columna
+        //recorrido del resultset e impresion por consola de los resultados
         while(resultado.next()){
             System.out.println(resultado.getString("nombre")+"\t\t"+
                     resultado.getString("apellidos")+"\t\t"+                    
@@ -51,7 +51,7 @@ public class ConsultarBD {
                      resultado.getFloat("salario")+"\n");
         }
         
-        //Paso 7: Liberar los recursos
+        //liberacion de los recursos Statement y Connection
         sentencia.close();
         conexion.close();   
     }
